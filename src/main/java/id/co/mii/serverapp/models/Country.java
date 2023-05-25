@@ -1,0 +1,28 @@
+package id.co.mii.serverapp.models;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "tb_country")
+public class Country {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "country_id")
+    private Integer id;
+    @Column(name = "country_code", length = 2, unique = true, nullable = false)
+    private String code;
+    @Column(name = "country_name", nullable = false)
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "region_id", nullable = false)
+    private Region region;
+}
